@@ -1,0 +1,394 @@
+/* static/style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+main {
+    /* CHANGED: Utilize more screen width */
+    padding: 20px;
+    max-width: 1200px; /* Increased max-width for wider screens */
+    width: 90%;      /* Take 90% of screen width */
+    margin: 20px auto; /* Keep it centered */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+#preferences-section {
+    text-align: center; /* Centers the heading */
+    padding: 30px;
+    background-color: #e6f7ff; /* Lighter blue background for form */
+    border: 1px solid #cceeff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+#preferences-section h2 {
+    color: #0056b3;
+    margin-bottom: 25px;
+}
+
+#preferences-section form {
+    display: flex;
+    flex-direction: column; /* Stacks the 'form-row' divs vertically */
+    align-items: center; /* Centers items horizontally within the form */
+    gap: 20px; /* Space between rows (e.g., between RSS/Num row and Keywords row) */
+    max-width: 900px; /* Max width for the form container itself */
+    margin: 0 auto; /* Center the form container */
+}
+
+#preferences-section label {
+      margin-bottom: 5px; /* Space below labels */
+    color: #333;
+    font-weight: bold;
+    width: 100%; /* Make labels span full width of their group */
+}
+
+#preferences-section textarea,
+#preferences-section input[type="text"],
+#preferences-section input[type="number"] {
+    width: 100%; /* Make input fields fill their parent group */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Include padding and border in the element's total width/height */
+}
+
+#preferences-section textarea {
+   min-height: 100px;
+    resize: vertical; /* Allow vertical resizing only */
+}
+
+#preferences-section input[type="number"] {
+    flex-basis: 120px; /* Fixed width for number input */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+#preferences-section button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-top: 10px; /* Space above button */
+}
+
+#preferences-section button:hover {
+    background-color: #0056b3;
+}
+
+/* Adjust keywords and num_articles to be on same line */
+/* Remove previous <br><br> after these input fields in HTML */
+.form-row { /* New class for wrapping elements you want on one line */
+     flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 20px;
+    width: 100%;
+    /* If other form-rows still need flex, we can apply display:flex to them specifically */
+    /* For now, just remove it from the general .form-row */
+}
+
+.rss-num-row { /* TARGETING THE NEW CLASS */
+    display: grid; /* Use CSS Grid for this specific row */
+    grid-template-columns: 3fr 1fr; /* Divide into two columns: 3 parts for textarea, 1 part for number input */
+    gap: 20px; /* Space between grid columns */
+    align-items: flex-end; /* Align content to the bottom of the grid cells */
+    width: 100%; /* Ensure it takes full width of its parent */
+}
+
+.form-field-group { /* Group label and input */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align label and input to the left within its group */
+    flex: 1; /* Allows these groups to share space in a flex-row */
+    min-width: 250px; /* Minimum width before forcing a wrap */
+}
+
+.form-field-group label {
+    flex-basis: auto; /* Let label width be natural */
+    margin-bottom: 5px;
+}
+.textarea-group {
+
+    min-width: auto; /* Increased min-width for the textarea part */
+}
+
+.num-articles-group {
+    /*flex: 0.5; /* Give the number input group less horizontal space */
+    min-width: auto; /* Reduced min-width for the number input part */
+    max-width: auto; /* Added a max-width to constrain it */
+}
+.num-articles-group input[type="number"] {
+    width: auto; /* Let content define width primarily */
+    max-width: 100%; /* But don't exceed its parent group */
+}
+/* Existing article styling */
+/* ... (keep all your .articles-grid, .news-article, nth-child, .generated-summary etc. rules) ... */
+h1, h2 {
+    color: #0056b3;
+}
+.form-row {
+    display: flex; /* Keep flex for other rows, or modify to grid as well */
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end; /* Keep this to align items to the bottom */
+    gap: 20px;
+    width: 100%;
+}
+/* NEW OR MODIFIED: Specific styling for the row containing RSS feeds and Number of Articles */
+/* This rule will target the first .form-row specifically, if it has .form-field-group inside */
+.form-row:first-of-type { /* Target the first form-row for grid layout */
+    display: grid; /* Use CSS Grid for this specific row */
+    grid-template-columns: 3fr 1fr; /* Divide into two columns: 3 parts for textarea, 1 part for number input */
+    gap: 20px; /* Space between grid columns */
+    align-items: flex-end; /* Align content to the bottom of the grid cells */
+}
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    background-color: #eee;
+    color: #555;
+    border-top: 1px solid #ddd;
+}
+
+/* static/style.css (add to the end of your existing CSS) */
+
+.news-article {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+.news-article:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.news-article h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.news-article h3 a {
+    color: #007bff; /* Link color */
+    text-decoration: none;
+    font-size: 1.5em; /* Larger title */
+}
+
+.news-article h3 a:hover {
+    text-decoration: underline;
+}
+
+.article-meta {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.full-content-preview {
+    background-color: #eaf6ff; /* Light blue background for preview */
+    border-left: 4px solid #007bff;
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-style: italic;
+    color: #555;
+}
+
+.full-content-preview h4 {
+    margin-top: 0;
+    color: #0056b3;
+    font-size: 1.1em;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+/* static/style.css (add to the end of your existing CSS) */
+
+.generated-summary {
+    background-color: #e0ffe0; /* Light green background */
+    border: 1px solid #4CAF50; /* Green border */
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-style: normal;
+    color: #333;
+    line-height: 1.5;
+    font-weight: bold; /* Make the summary text slightly bolder */
+}
+
+.generated-summary h4 {
+    margin-top: 0;
+    color: #218838; /* Darker green heading */
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+/* Optional: Adjust .full-content-preview if you want its styling to be different */
+.full-content-preview {
+    background-color: #f0f8ff; /* Lighter blue for excerpt */
+    border-left: 4px solid #aaddff; /* Lighter border */
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-style: italic;
+    color: #555;
+}
+
+/* static/style.css (Add these new rules to the end) */
+
+/* Container for the grid layout */
+.articles-grid {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    gap: 20px;       /* Space between grid items */
+    justify-content: center; /* Center items when they don't fill a full row */
+    margin-top: 20px;
+}
+
+/* Styling for individual news articles within the grid */
+.news-article {
+    flex: 1 1 calc(33.333% - 20px); /* Adjust to show roughly 3 per row minus gap */
+    /*
+    flex: 1 1: Allows items to grow and shrink
+    calc(33.333% - 20px): Sets base width to 1/3rd minus the gap.
+                         For 2 per row, use calc(50% - 20px);
+                         For 4 per row, use calc(25% - 20px);
+    */
+    max-width: calc(33.333% - 20px); /* Ensures it doesn't grow too wide on large screens */
+
+    /* Make it more square-like (aspect-ratio is modern, padding-bottom trick is older) */
+    /* You might need to adjust content inside or overflow if summaries are very long */
+    /* aspect-ratio: 1 / 1; /* Aspect ratio for a perfect square */
+    /* overflow: hidden; */ /* Hide overflow if content is too large */
+
+    min-height: 250px; /* Ensure a minimum height for smaller articles */
+    display: flex; /* Use flexbox for inner content alignment */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: space-between; /* Push footer-like elements (read more) to bottom */
+
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 0; /* Remove old margin-bottom as gap handles spacing */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+.news-article:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Basic Responsive Adjustments (Optional but Recommended) */
+@media (max-width: 900px) { /* On medium screens, 2 articles per row */
+    .news-article {
+        flex: 1 1 calc(50% - 20px);
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 600px) { /* On small screens, 1 article per row */
+    .news-article {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
+/* Varied Background Colors (using nth-child for cycling) */
+.news-article:nth-child(3n+1) { /* Every 1st, 4th, 7th... */
+    background-color: #f0f8ff; /* Alice Blue */
+    border-color: #aaddff;
+}
+.news-article:nth-child(3n+2) { /* Every 2nd, 5th, 8th... */
+    background-color: #fff0f5; /* Lavender Blush */
+    border-color: #ffdae9;
+}
+.news-article:nth-child(3n+3) { /* Every 3rd, 6th, 9th... */
+    background-color: #f5fff0; /* Honeydew */
+    border-color: #c9e6bb;
+}
+
+/* Optional: Adjust text colors based on background for readability */
+.news-article:nth-child(3n+1) h3 a,
+.news-article:nth-child(3n+1) .article-meta,
+.news-article:nth-child(3n+1) .read-more {
+    color: #004085; /* Darker blue for text */
+}
+.news-article:nth-child(3n+2) h3 a,
+.news-article:nth-child(3n+2) .article-meta,
+.news-article:nth-child(3n+2) .read-more {
+    color: #8b0042; /* Darker pink for text */
+}
+.news-article:nth-child(3n+3) h3 a,
+.news-article:nth-child(3n+3) .article-meta,
+.news-article:nth-child(3n+3) .read-more {
+    color: #0d6e00; /* Darker green for text */
+}
+
+/* Adjust AI Summary box colors for better contrast with varied backgrounds */
+.news-article .generated-summary {
+    background-color: rgba(224, 255, 224, 0.7); /* Slightly transparent light green */
+    border-color: rgba(76, 175, 80, 0.7);
+}
+.news-article .generated-summary h4 {
+    color: #218838;
+}

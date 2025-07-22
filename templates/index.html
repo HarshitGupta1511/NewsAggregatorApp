@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized News Aggregator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Your Personalized News Dashboard</h1>
+    </header>
+    <main>
+        <section id="preferences-section">
+            <h2>Set Your Preferences</h2>
+            <form action="/customize" method="POST">
+
+<!--    <label for="rss_feeds">RSS Feed URLs (one per line):</label><br>-->
+<!--    <textarea id="rss_feeds" name="rss_feeds" rows="5" cols="50" placeholder="e.g.,-->
+<!--https://www.npr.org/rss/rss.php?id=1001-->
+<!--http://feeds.bbci.co.uk/news/rss.xml-->
+<!--http://sports.espn.go.com/espn/rss/news"-->
+<!--&gt;{{ "\n".join(session.get('rss_feeds', ['https://www.npr.org/rss/rss.php?id=1001', 'http://feeds.bbci.co.uk/news/rss.xml', 'http://sports.espn.go.com/espn/rss/news'])) }}</textarea><br><br>-->
+
+<!--    <div class="form-row">-->
+<!--                    <div class="form-field-group">-->
+<!--                        <label for="keywords">Keywords (comma-separated):</label>-->
+<!--                        <input type="text" id="keywords" name="keywords" value="{{ session.get('keywords', '') }}" placeholder="e.g., AI, cybersecurity, climate change">-->
+<!--                    </div>-->
+<!--                    <div class="form-field-group">-->
+<!--                        <label for="exclude_keywords">Exclude Keywords (comma-separated):</label>-->
+<!--                        <input type="text" id="exclude_keywords" name="exclude_keywords" value="{{ session.get('exclude_keywords', '') }}" placeholder="e.g., politics, celebrity news">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="form-field-group">-->
+<!--                    <label for="num_articles">Number of articles to display:</label>-->
+<!--                    <input type="number" id="num_articles" name="num_articles" value="{{ session.get('num_articles', 10) }}" min="1" max="50">-->
+<!--                </div>-->
+<!--    <button type="submit">Update Preferences</button>-->
+
+    <div class="form-row">
+        <div class="form-row rss-num-row"><div class="form-field-group textarea-group">
+            <label for="rss_feeds">RSS Feed URLs (one per line):</label>
+            <textarea id="rss_feeds" name="rss_feeds" rows="5" cols="50" placeholder="e.g.,
+            https://www.npr.org/rss/rss.php?id=1001
+            http://feeds.bbci.co.uk/news/rss.xml
+            http://sports.espn.go.com/espn/rss/news ">
+                {{ "\n".join(session.get('rss_feeds', ['https://www.npr.org/rss/rss.php?id=1001', 'http://feeds.bbci.co.uk/news/rss.xml', 'http://sports.espn.go.com/espn/rss/news'])) }}</textarea><br><br></div>
+
+            <div class="form-field-group num-articles-group">
+            <label for="num_articles">Number of articles to display:</label>
+            <input type="number" id="num_articles" name="num_articles" value="{{ session.get('num_articles', 10) }}" min="1" max="50">
+        </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-field-group">
+            <label for="keywords">Keywords (comma-separated):</label>
+            <input type="text" id="keywords" name="keywords" value="{{ session.get('keywords', '') }}" placeholder="e.g., AI, cybersecurity, climate change">
+        </div>
+        <div class="form-field-group">
+            <label for="exclude_keywords">Exclude Keywords (comma-separated):</label>
+            <input type="text" id="exclude_keywords" name="exclude_keywords" value="{{ session.get('exclude_keywords', '') }}" placeholder="e.g., politics, celebrity news">
+        </div>
+    </div>
+    <button type="submit">Update Preferences</button>
+
+</form>
+        </section>
+
+        <section id="news-section">
+            <h2>Latest News for You</h2>
+            <div class="articles-grid">
+                {% if articles %}
+                    {% for article in articles %}
+                        <div class="news-article">
+                            <h3><a href="{{ article.link }}" target="_blank">{{ article.title }}</a></h3>
+                            <p class="article-meta">Published: {{ article.published }}</p>
+
+                            {% if article.generated_summary %}
+                                <div class="generated-summary">
+                                    <h4>AI Summary:</h4>
+                                    <p>{{ article.generated_summary }}</p>
+                                </div>
+                            {% else %}
+                                <p>{{ article.summary }}</p>
+                            {% endif %}
+
+                            {% if article.full_content and 'Could not extract' not in article.full_content %}
+                                <div class="full-content-preview">
+                                    <h4>Article Excerpt:</h4>
+                                    <p>{{ article.full_content }}</p>
+                                </div>
+                            {% endif %}
+
+                            <a href="{{ article.link }}" target="_blank" class="read-more">Read Full Article &rarr;</a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No news articles found or an error occurred. Please try again later.</p>
+                {% endif %}
+            </div>
+            </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Personalized News Aggregator</p>
+    </footer>
+</body>
+</html>
